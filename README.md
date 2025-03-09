@@ -64,25 +64,62 @@ Connect LED 2 to GP17 via a 330Ω resistor.
 Connect the other terminals of the switches to GND.
 
 ## PROGRAM (MicroPython)
-''''
+```
+ from machine import Pin
+ from time import sleep
+ switch1= Pin(2, Pin.IN)
+ switch2= Pin(3,Pin.IN)
+ led = Pin(15,Pin.OUT)
+ led2= Pin (16,Pin.OUT)
+ while True:
+    sw1_state= switch1.value()
+    sw2_state= switch2.value()
+    print("Switch 1 state:",sw1_state)
+    print("Switch 2 state:",sw2_state)
+    led.value(0)
+    if sw1_state==1 and sw2_state==1:
+        led.value(0)
+        led2.value(0)
+    elif sw1_state==1:
+        led.value(1)
+        sleep(0.5)
+        led.value(0)
+        led2.value(0)
+    elif sw2_state==1:
+        led.value(0)
+        led2.value(1)
+        sleep(0.5)
+        led2.value(0)
+    sleep(0.5)
 
-
-
+```
  
 
 ## OUTPUT
 
 
+FIGURE-01: BOTH THE SWITCHES OFF
 
-FIGURE-02: CIRCUIT CONNECTION
+![image](https://github.com/user-attachments/assets/bbba9c2a-0be8-4838-bc6d-149db9e0fbfc)
 
-FIGURE-03: CODE EXECUTION OUTPUT
 
-FIGURE-04: LED STATUS BASED ON SWITCH INPUTS
+ FIGURE-02: SWITCH 1 ON AND SWITCH 2 OFF
+ 
+![image](https://github.com/user-attachments/assets/4b20995a-28ab-493d-a643-1380252d6785)
+
+FIGURE-03: SWITCH 1 OFF AND SWITCH 2 ON
+
+![image](https://github.com/user-attachments/assets/a374fcaf-eb70-43b7-a14c-04b50394283d)
+
+FIGURE-04: BOTH THE SWITCHES ON
+
+![image](https://github.com/user-attachments/assets/3b741cf9-5316-4cb2-b8c8-1c388eb85ff2)
+
+
 ## TIMING DIGAGRAM 
 
+![image](https://github.com/user-attachments/assets/48a35ab6-6940-418b-ad7e-c823e3db0f2a)
 
-UPLOAD YOUR TIMING DIGARAM HERE 
 
 
 
